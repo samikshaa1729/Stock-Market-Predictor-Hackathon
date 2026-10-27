@@ -1,0 +1,9 @@
+flask>=3.0
+gunicorn
+mysql-connector-python
+bcrypt
+numpy
+pandas
+matplotlib
+yfinance
+scikit-learn

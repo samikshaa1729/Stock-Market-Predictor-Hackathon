@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stock Predictor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body data-user="{{ username or '' }}">
+  <header class="top">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true">
+        <path d="M6 6v20M16 3v22M26 9v18" stroke="#8fa2c0" stroke-width="2" stroke-linecap="round"/>
+        <rect x="3.5" y="11" width="5" height="9" rx="1" fill="#3ddc97"/>
+        <rect x="13.5" y="8" width="5" height="11" rx="1" fill="#ff6b6b"/>
+        <rect x="23.5" y="14" width="5" height="8" rx="1" fill="#3ddc97"/>
+      </svg>
+      <div><h1 data-i18n="title">Stock Predictor</h1><p data-i18n="tagline"></p></div>
+    </div>
+    <div class="lang" role="group" aria-label="Language">
+      <button data-lang="en">English</button>
+      <button data-lang="hi">हिन्दी</button>
+      <button data-lang="mr">मराठी</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="auth" class="panel narrow">
+      <h2 data-i18n="login">Login</h2>
+      <label for="username" data-i18n="username"></label>
+      <input id="username" autocomplete="username">
+      <label for="password" data-i18n="password"></label>
+      <input id="password" type="password" autocomplete="current-password">
+      <div class="btns">
+        <button class="btn primary" id="loginBtn" data-i18n="login"></button>
+        <button class="btn ghost" id="signupBtn" data-i18n="signup"></button>
+      </div>
+      <p id="authMsg" class="msg" role="status"></p>
+    </section>
+
+    <section id="main" class="hidden">
+      <div class="bar">
+        <b id="who"></b>
+        <nav class="tabs" role="tablist">
+          <button class="tab on" data-tab="predict" data-i18n="tabPredict"></button>
+          <button class="tab" data-tab="compare" data-i18n="tabCompare"></button>
+          <button class="tab" data-tab="history" data-i18n="tabHistory"></button>
+        </nav>
+        <button class="btn ghost small" id="logoutBtn" data-i18n="logout"></button>
+      </div>
+
+      <div id="tab-predict">
+        <div class="panel ask">
+          <div>
+            <label for="ticker" data-i18n="tickerLabel"></label>
+            <input id="ticker" value="AAPL" list="tickerList" autocomplete="off" spellcheck="false">
+            <datalist id="tickerList">
+              <option value="AAPL"><option value="MSFT"><option value="TSLA"><option value="NVDA">
+              <option value="RELIANCE.NS"><option value="TCS.NS"><option value="INFY.NS"><option value="HDFCBANK.NS">
+            </datalist>
+          </div>
+          <button class="btn primary" id="predictBtn" data-i18n="predict"></button>
+        </div>
+        <p id="status" class="msg" role="status"></p>
+        <div id="result"></div>
+      </div>
+
+      <div id="tab-compare" class="hidden">
+        <div class="panel">
+          <h2 data-i18n="compareTitle"></h2>
+          <p class="muted" data-i18n="compareHint"></p>
+          <input id="clusterInput" value="AAPL, MSFT, TSLA, NVDA, RELIANCE.NS, TCS.NS, INFY.NS, HDFCBANK.NS" spellcheck="false">
+          <button class="btn primary" id="clusterBtn" data-i18n="run"></button>
+          <p id="clusterStatus" class="msg" role="status"></p>
+          <div id="clusterOut"></div>
+        </div>
+      </div>
+
+      <div id="tab-history" class="hidden">
+        <div class="panel"><h2 data-i18n="tabHistory"></h2><div id="history"></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot" data-i18n="disclaimer"></footer>
+  <script src="{{ url_for('static', filename='i18n.js') }}"></script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
